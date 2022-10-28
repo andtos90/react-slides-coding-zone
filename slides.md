@@ -25,7 +25,6 @@ css: unocss
 
 # React
 
-Introduzione alla più famosa libreria per la creazione di Web UI dinamiche
 
 <!-- <div class="pt-12">
   <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
@@ -48,23 +47,16 @@ The last comment block of each slide will be treated as slide notes. It will be 
 -->
 
 ---
-
+layout: center
+class: text-center
+---
 # React?
 
-Slidev is a slides maker and presenter designed for developers, consist of the following features
-
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - theme can be shared and used with npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embedding Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export into PDF, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - anything possible on a webpage
-
 <br>
 <br>
 
-Read more about [Why Slidev?](https://sli.dev/guide/why)
+<h2><u>libreria</u> <u>Javascript</u> per la creazione di <u>Web UI</u> <u>dinamiche</u></h2>
+
 
 <!--
 You can have `style` tag in markdown to override the style for the current page.
@@ -82,6 +74,33 @@ h1 {
   -moz-text-fill-color: transparent;
 }
 </style>
+
+---
+layout: center
+class: text-center
+---
+# Maggio 2013
+
+[Why did we build React?](https://reactjs.org/blog/2013/06/05/why-react.html)
+
+<br>
+<br>
+
+# Marzo 2015
+[Introducing React Native](https://reactjs.org/blog/2015/03/26/introducing-react-native.html)
+
+<br>
+<br>
+
+# Febbraio 2019
+[React v16.8: The One With Hooks](https://reactjs.org/blog/2019/02/06/react-v16.8.0.html)
+
+<br>
+<br>
+
+# Marzo 2022
+[React v18.0](https://reactjs.org/blog/2022/03/29/react-v18.html)
+
 
 ---
 
