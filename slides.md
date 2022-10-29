@@ -101,10 +101,78 @@ class: text-center
 # Marzo 2022
 [React v18.0](https://reactjs.org/blog/2022/03/29/react-v18.html)
 
+---
+layout: center
+class: text-center
+---
+# React in un minuto
+
+<iframe height="400px" width="800px"  scrolling="no" title="Untitled" src="https://codepen.io/andtos90/embed/LYrVKOy?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/andtos90/pen/LYrVKOy">
+  Untitled</a> by Andrea Tosatto (<a href="https://codepen.io/andtos90">@andtos90</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
 
 ---
 
+# Come iniziare
+
+<div grid="~ cols-2 gap-4">
+<div>
+```html {all|4-5|8-15|17-18|all|none}
+<!-- index.html -->
+<body>
+  <h2>React in un minuto</h2>
+  <!-- We will put our React component inside this div. -->
+  <div id="like-button-root"></div>
+
+  <!-- Load React. -->
+  <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+  <script
+  src="https://unpkg.com/react@18/umd/react.development.js">
+  </script>
+
+  <script 
+  src="https://unpkg.com/react-dom@18/umd/react-dom.development.js">
+  </script>
+
+  <!-- Load your React component. -->
+  <script src="like-button.js"></script>
+</body>
+```
+</div>
+
+<div>
+```js {none|all|17-19|3-15|6-14|4|10-14|6-8|all}
+// like-button.js
+
+function LikeButton() {
+  const [liked, setLiked] = React.useState(false);
+
+  if (liked) {
+    return 'You liked this!';
+  }
+
+  return React.createElement(
+    'button',
+    { onClick: () => setLiked(true) },
+    'Like'
+  );
+}
+
+const rootNode=document.getElementById('like-button-root');
+const root=ReactDOM.createRoot(rootNode);
+root.render(React.createElement(LikeButton));
+```
+  </div>
+</div>
+
+[Add React to a Website - React Docs](https://beta.reactjs.org/learn/add-react-to-a-website)
+---
+
 # Navigation
+
+https://codepen.io/andtos90/full/LYrVKOy
 
 Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
 
