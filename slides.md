@@ -170,6 +170,176 @@ root.render(React.createElement(LikeButton));
 [Add React to a Website - React Docs](https://beta.reactjs.org/learn/add-react-to-a-website)
 ---
 
+# JSX - 1 
+
+<div grid="~ cols-2 gap-4">
+<div>
+```js {all|10-14}
+// like-button.js
+
+function LikeButton() {
+  const [liked, setLiked] = React.useState(false);
+
+  if (liked) {
+    return 'You liked this!';
+  }
+
+  return React.createElement(
+    'button',
+    { onClick: () => setLiked(true) },
+    'Like'
+  );
+}
+
+const rootNode=document.getElementById('like-button-root');
+const root=ReactDOM.createRoot(rootNode);
+root.render(React.createElement(LikeButton));
+```
+  </div>
+  <div>
+```js {all|10-14}
+// like-button.js
+
+function LikeButton() {
+  const [liked, setLiked] = React.useState(false);
+
+  if (liked) {
+    return 'You liked this!';
+  }
+
+  return (
+    <button onClick={() => setLiked(true)}>
+      Like
+    </button>
+  );
+}
+
+const rootNode=document.getElementById('like-button-root');
+const root=ReactDOM.createRoot(rootNode);
+root.render(React.createElement(LikeButton));
+```
+  </div>
+</div>
+
+[Try JSX - React Docs](https://beta.reactjs.org/learn/add-react-to-a-website#try-jsx)<br>
+[Writing Markup with JSX - React Docs](https://beta.reactjs.org/learn/writing-markup-with-jsx)
+---
+
+# JSX - 2
+
+<div id="wrap">
+  <iframe id="scaled-frame" src="https://transform.tools/html-to-jsx"></iframe>
+</div>
+
+<style>
+#wrap {
+  width: 900px;
+  height: 400px;
+  padding: 0;
+  overflow: hidden;
+}
+
+#scaled-frame {
+  width: 1800px;
+  height: 800px;
+  border: 0px;
+}
+
+#scaled-frame {
+  zoom: 0.5;
+  -moz-transform: scale(0.5);
+  -moz-transform-origin: 0 0;
+  -o-transform: scale(0.5);
+  -o-transform-origin: 0 0;
+  -webkit-transform: scale(0.5);
+  -webkit-transform-origin: 0 0;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  #scaled-frame {
+    zoom: 1;
+  }
+}
+</style>
+
+---
+
+# Componenti - Props
+
+<div grid="~ cols-2 gap-4">
+<div>
+```js {all|2,6,11,18-19}
+// like-button.js
+function LikeButton({ title }) {
+  const [liked, setLiked] = React.useState(false);
+
+  if (liked) {
+    return 'You liked ' + title;
+  }
+
+  return (
+    <button onClick={() => setLiked(true)}>
+      Like {title}
+    </button>
+  );
+}
+const rootNode=document.getElementById('like-button-root');
+const root=ReactDOM.createRoot(rootNode);
+root.render(<>
+    <LikeButton title={"Cuccioli"} />
+    <LikeButton title={"Bambini"} />
+  </>);
+```
+</div>
+  <div>
+  <br>
+  <iframe height="250" width="420" scrolling="no" title="Untitled" src="https://codepen.io/andtos90/embed/ZERbzXq?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/andtos90/pen/ZERbzXq">
+  Untitled</a> by Andrea Tosatto (<a href="https://codepen.io/andtos90">@andtos90</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+    </div>
+</div>
+
+[Your First Component - React Docs](https://beta.reactjs.org/learn/your-first-component)
+---
+
+# Componenti - Liste
+
+<div grid="~ cols-2 gap-4">
+<div>
+```js {all|1|3-6|10-16}
+import LikeButton from "./like-button.js"
+
+const thingsToLike = [
+  "Cuccioli", "Bambini", "Ragni", "Musica Indie Italiana",
+  "React", "Angular"
+];
+
+const rootNode = document.getElementById("like-button-root");
+const root = ReactDOM.createRoot(rootNode);
+root.render(
+  <>
+    {thingsToLike.map((title) => (
+      <LikeButton title={title} />
+    ))}
+  </>
+);
+```
+</div>
+  <div>
+  <br>
+  <iframe height="250" width="420" scrolling="no" title="Untitled" src="https://codepen.io/andtos90/embed/oNyjNbY?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/andtos90/pen/oNyjNbY">
+  Componenti - 1</a> by Andrea Tosatto (<a href="https://codepen.io/andtos90">@andtos90</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+    </div>
+</div>
+
+[Rendering Lists](https://beta.reactjs.org/learn/rendering-lists)
+---
+
 # Navigation
 
 https://codepen.io/andtos90/full/LYrVKOy
