@@ -264,7 +264,7 @@ root.render(React.createElement(LikeButton));
 
 ---
 
-# Componenti - Props
+# Componenti - Riutilizzo
 
 <div grid="~ cols-2 gap-4">
 <div>
@@ -338,6 +338,89 @@ root.render(
 </div>
 
 [Rendering Lists](https://beta.reactjs.org/learn/rendering-lists)
+---
+
+# Props e State
+
+```js {all|1,5,10,17,18|2,4,9}
+function LikeButton({ title }) {
+  const [liked, setLiked] = React.useState(false);
+
+  if (liked) {
+    return 'You liked ' + title;
+  }
+
+  return (
+    <button onClick={() => setLiked(true)}>
+      Like {title}
+    </button>
+  );
+}
+const rootNode=document.getElementById('like-button-root');
+const root=ReactDOM.createRoot(rootNode);
+root.render(<>
+    <LikeButton title={"Cuccioli"} />
+    <LikeButton title={"Bambini"} />
+  </>);
+```
+
+[How declarative UI compares to imperative - React Docs](https://beta.reactjs.org/learn/reacting-to-input-with-state#how-declarative-ui-compares-to-imperative)
+---
+
+# Condividere lo stato
+
+<div grid="~ cols-2 gap-4">
+<div>
+```js {all}
+function LikeButton({ title }) {
+  const [liked, setLiked] = React.useState(false);
+
+  if (liked) {
+    return 'You liked ' + title;
+  }
+
+  return (
+    <button onClick={() => setLiked(true)}>
+      Like {title}
+    </button>
+  );
+}
+const rootNode=document.getElementById('like-button-root');
+const root=ReactDOM.createRoot(rootNode);
+root.render(<>
+    <LikeButton title={"Cuccioli"} />
+    <LikeButton title={"Bambini"} />
+  </>);
+```
+  </div>
+  <div>
+```js {all}
+const thingsToLike = [
+  "Cuccioli", "Bambini", "Ragni", "Musica Indie Italiana",
+  "React", "Angular"];
+function LikeList() {
+  const [liked, setLiked] = React.useState([]);
+  return thingsToLike.map((title) => (
+      <LikeButton 
+        title={title} 
+        isLiked={liked.includes(title)} 
+        onLike={() => setLiked(liked.push(title))}
+        />
+    ))
+}
+function LikeButton({ title, isLiked, onLike }) {
+  if (isLiked) { return 'You liked ' + title; }
+  return (
+    <button onClick={() => onLike()}>
+      Like {title}
+    </button>
+  );
+}
+root.render(<LikeList/>);
+```
+  </div>
+</div>
+
 ---
 
 # Navigation
