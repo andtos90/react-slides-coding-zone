@@ -367,6 +367,16 @@ root.render(<>
 [How declarative UI compares to imperative - React Docs](https://beta.reactjs.org/learn/reacting-to-input-with-state#how-declarative-ui-compares-to-imperative)
 ---
 
+# Condividere lo stato - esempio
+
+<iframe height="900" style="width: 800px;" scrolling="no" title="Componenti - 2" src="https://codepen.io/andtos90/embed/eYKpQPN?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/andtos90/pen/eYKpQPN">
+  Componenti - 2</a> by Andrea Tosatto (<a href="https://codepen.io/andtos90">@andtos90</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+---
+
 # Condividere lo stato
 
 <div grid="~ cols-2 gap-4">
@@ -375,39 +385,24 @@ root.render(<>
 function LikeButton({ title }) {
   const [liked, setLiked] = React.useState(false);
 
-  if (liked) {
-    return 'You liked ' + title;
-  }
-
+  if (liked) { return 'You liked ' + title; }
   return (
     <button onClick={() => setLiked(true)}>
       Like {title}
     </button>
   );
 }
-const rootNode=document.getElementById('like-button-root');
-const root=ReactDOM.createRoot(rootNode);
+
 root.render(<>
-    <LikeButton title={"Cuccioli"} />
-    <LikeButton title={"Bambini"} />
+    <LikeButton title={"React"} />
+    <LikeButton title={"Angular"} />
+    <LikeButton title={"Vue"} />
+    <LikeButton title={"Solid"} />
   </>);
 ```
   </div>
   <div>
-```js {all}
-const thingsToLike = [
-  "Cuccioli", "Bambini", "Ragni", "Musica Indie Italiana",
-  "React", "Angular"];
-function LikeList() {
-  const [liked, setLiked] = React.useState([]);
-  return thingsToLike.map((title) => (
-      <LikeButton 
-        title={title} 
-        isLiked={liked.includes(title)} 
-        onLike={() => setLiked(liked.push(title))}
-        />
-    ))
-}
+```js {all|1|1-8|11-24|12,16-20|12-21|}
 function LikeButton({ title, isLiked, onLike }) {
   if (isLiked) { return 'You liked ' + title; }
   return (
@@ -416,8 +411,128 @@ function LikeButton({ title, isLiked, onLike }) {
     </button>
   );
 }
-root.render(<LikeList/>);
+
+const thingsToLike = ["React", "Angular", "Vue", "Solid"];
+function LikeList() {
+  const [liked, setLiked] = React.useState([]);
+  return <>
+    Number of likes: {liked.length}
+    {thingsToLike.map((title) => (
+      <LikeButton 
+        title={title} 
+        isLiked={liked.includes(title)} 
+        onLike={() => setLiked([...liked, title])}
+      />
+    ))}
+  </>
+}
+root.render(<LikeList />;
 ```
+  </div>
+</div>
+
+---
+
+# Condividere lo stato
+
+<div grid="~ cols-2 gap-4">
+<div>
+```js {all}
+function LikeButton({ title }) {
+  const [liked, setLiked] = React.useState(false);
+
+  if (liked) { return 'You liked ' + title; }
+  return (
+    <button onClick={() => setLiked(true)}>
+      Like {title}
+    </button>
+  );
+}
+
+root.render(<>
+    <LikeButton title={"React"} />
+    <LikeButton title={"Angular"} />
+    <LikeButton title={"Vue"} />
+    <LikeButton title={"Solid"} />
+  </>);
+```
+  </div>
+  <div>
+```js {all|1|1-8|11-24|12,16-20|12-21|}
+function LikeButton({ title, isLiked, onLike }) {
+  if (isLiked) { return 'You liked ' + title; }
+  return (
+    <button onClick={() => onLike()}>
+      Like {title}
+    </button>
+  );
+}
+
+const thingsToLike = ["React", "Angular", "Vue", "Solid"];
+function LikeList() {
+  const [liked, setLiked] = React.useState([]);
+  return <>
+    Number of likes: {liked.length}
+    {thingsToLike.map((title) => (
+      <LikeButton 
+        title={title} 
+        isLiked={liked.includes(title)} 
+        onLike={() => setLiked([...liked, title])}
+      />
+    ))}
+  </>
+}
+root.render(<LikeList />;
+```
+  </div>
+</div>
+
+---
+
+# Props drilling 
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+
+
+
+```js {all|18,21,5,9,1,2}
+function LikeButton({ title, isLiked, onLike }) {
+  if (isLiked) { return 'You liked ' + title; }
+  //...//
+}
+function LikeList({ liked, setLiked }) {
+  return thingsToLike.map((title) => (
+    <LikeButton
+      title={title}
+      isLiked={liked.includes(title)}
+      onLike={() => setLiked([...liked, title])}
+    />
+  ));
+}
+function LikeHeader({ liked }) {
+  return (<div>Number of likes: {liked.length}</div>);
+}
+function LikeDashboard() {
+  const [liked, setLiked] = React.useState([]);
+  return (<>
+            <LikeHeader liked={liked}/>
+            <LikeList liked={liked} setLiked={setLiked}/>
+          </>);
+}
+root.render(<LikeDashboard />);
+```
+  </div>
+  <div>
+  <br>
+  <br>
+  <br>
+  <iframe height="250" width="420" scrolling="no" title="Condividere lo stato" src="https://codepen.io/andtos90/embed/jOKbXzq?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/andtos90/pen/jOKbXzq">
+  Condividere lo stato</a> by Andrea Tosatto (<a href="https://codepen.io/andtos90">@andtos90</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
   </div>
 </div>
 
