@@ -3,7 +3,7 @@
 theme: seriph
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
-background: https://www.mindinventory.com/blog/wp-content/uploads/2018/07/reactjs-1200x600.jpg
+background: ./assets/react-icon.svg
 # apply any windi css classes to the current slide
 class: 'text-center'
 # https://sli.dev/custom/highlighters.html
@@ -12,10 +12,8 @@ highlighter: shiki
 lineNumbers: false
 # some information about the slides, markdown enabled
 info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
+  ## React basic
+  Introduction to React by Andrea Tosatto
 # persist drawings in exports and build
 drawings:
   persist: false
@@ -23,28 +21,18 @@ drawings:
 css: unocss
 ---
 
-# React
 
-
-<!-- <div class="pt-12">
-  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
-    Press Space for next page <carbon:arrow-right class="inline"/>
-  </span>
+<div class="absolute left-385px bottom-435px">
+  <h2>Andrea Tosatto</h2>
 </div>
 
-<div class="abs-br m-6 flex gap-2">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub"
-    class="text-xl icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon-logo-github />
-  </a>
-</div> -->
+<div class="absolute left-420px bottom-220px">
+  <h1> React </h1>
+</div>
 
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
+<div class="absolute left-340px bottom-90px">
+  <a href="https://react-basic-thecmmbay.tosat.to">https://react-basic-thecmmbay.tosat.to</a>
+</div>
 
 ---
 layout: center
@@ -55,7 +43,7 @@ class: text-center
 <br>
 <br>
 
-<h2><u>libreria</u> <u>Javascript</u> per la creazione di <u>Web UI</u> <u>dinamiche</u></h2>
+<h2><u>Libreria</u> <u>Javascript</u> per la creazione di <u>Web UI</u> <u>dinamiche</u></h2>
 
 
 <!--
