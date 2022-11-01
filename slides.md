@@ -143,6 +143,7 @@ class: text-center
 </div>
 
 <div>
+
 ```js {none|all|17-19|3-15|6-14|4|10-14|6-8|all}
 // like-button.js
 
@@ -174,6 +175,7 @@ root.render(React.createElement(LikeButton));
 
 <div grid="~ cols-2 gap-4">
 <div>
+
 ```js {all|10-14}
 // like-button.js
 
@@ -197,6 +199,7 @@ root.render(React.createElement(LikeButton));
 ```
   </div>
   <div>
+
 ```js {all|10-14}
 // like-button.js
 
@@ -308,6 +311,7 @@ root.render(<>
 
 <div grid="~ cols-2 gap-4">
 <div>
+
 ```js {all|1|3-6|10-16}
 import LikeButton from "./like-button.js"
 
@@ -381,6 +385,7 @@ root.render(<>
 
 <div grid="~ cols-2 gap-4">
 <div>
+
 ```js {all}
 function LikeButton({ title }) {
   const [liked, setLiked] = React.useState(false);
@@ -402,6 +407,7 @@ root.render(<>
 ```
   </div>
   <div>
+
 ```js {all|1|1-8|11-24|12,16-20|12-21|}
 function LikeButton({ title, isLiked, onLike }) {
   if (isLiked) { return 'You liked ' + title; }
@@ -437,6 +443,7 @@ root.render(<LikeList />;
 
 <div grid="~ cols-2 gap-4">
 <div>
+
 ```js {all}
 function LikeButton({ title }) {
   const [liked, setLiked] = React.useState(false);
@@ -458,6 +465,7 @@ root.render(<>
 ```
   </div>
   <div>
+
 ```js {all|1|1-8|11-24|12,16-20|12-21|}
 function LikeButton({ title, isLiked, onLike }) {
   if (isLiked) { return 'You liked ' + title; }
@@ -489,13 +497,10 @@ root.render(<LikeList />;
 
 ---
 
-# Props drilling 
+# Prop drilling 
 
 <div grid="~ cols-2 gap-4">
 <div>
-
-
-
 
 ```js {all|18,21,5,9,1,2}
 function LikeButton({ title, isLiked, onLike }) {
@@ -531,6 +536,106 @@ root.render(<LikeDashboard />);
   <iframe height="250" width="420" scrolling="no" title="Condividere lo stato" src="https://codepen.io/andtos90/embed/jOKbXzq?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href="https://codepen.io/andtos90/pen/jOKbXzq">
   Condividere lo stato</a> by Andrea Tosatto (<a href="https://codepen.io/andtos90">@andtos90</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+  </div>
+</div>
+
+---
+
+# Context - Esempio
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+```js {all}
+function LikeButton({ title, isLiked, onLike }) {
+  if (isLiked) { return 'You liked ' + title; }
+  //...//
+}
+function LikeList({ liked, setLiked }) {
+  return thingsToLike.map((title) => (
+    <LikeButton
+      title={title}
+      isLiked={liked.includes(title)}
+      onLike={() => setLiked([...liked, title])}
+    />
+  ));
+}
+function LikeHeader({ liked }) {
+  return (<div>Number of likes: {liked.length}</div>);
+}
+function LikeDashboard() {
+  const [liked, setLiked] = React.useState([]);
+  return (<>
+            <LikeHeader liked={liked}/>
+            <LikeList liked={liked} setLiked={setLiked}/>
+          </>);
+}
+root.render(<LikeDashboard />);
+```
+  </div>
+  <div>
+
+```js {all|1,9,10,13,19,20|1,-3,8,13-16,18-21|all}
+function LikeButton({ title }) {
+  const { getIsLiked, setLiked } 
+        = React.useContext(LikeContext);
+  if (getIsLiked(title)) { return 'You liked ' + title; }
+  return (<button onClick={() => setLiked(title)}>
+            Like {title}
+          </button>);
+}
+function LikeList() {
+  return thingsToLike.map((title) => (<LikeButton/>));
+}
+
+function LikeHeader() {
+  const { liked } = React.useContext(LikeContext);
+  return (<div>Number of likes: {liked.length}</div>);
+}
+function LikeDashboard() {
+  return (<LikeProvider>
+            <LikeHeader/>
+            <LikeList/>
+          </LikeProvider>);
+}
+root.render(<LikeDashboard />);
+```
+  </div>
+</div>
+
+---
+
+# Context - Provider
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+```js {all|1,3|3-16|4,7-11|all}
+const LikeContext = React.createContext([]);
+
+function LikeProvider({ children }) {
+  const [liked, setLiked] = React.useState([]);
+  return (
+    <LikeContext.Provider
+      value={{
+        liked: liked,
+        setLiked: (title) => setLiked([...liked, title]),
+        getIsLiked: (title) => liked.includes(title)
+      }}
+    >
+      {children}
+    </LikeContext.Provider>
+  );
+}
+```
+  </div>
+  <div>
+  <br>
+  <iframe height="250" width="420" scrolling="no" title="Context" src="https://codepen.io/andtos90/embed/Vwdezrd?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/andtos90/pen/Vwdezrd">
+  Context</a> by Andrea Tosatto (<a href="https://codepen.io/andtos90">@andtos90</a>)
   on <a href="https://codepen.io">CodePen</a>.
 </iframe>
   </div>
