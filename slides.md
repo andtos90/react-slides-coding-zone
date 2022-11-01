@@ -1,6 +1,12 @@
 ---
 # try also 'default' to start simple
 theme: seriph
+# title of your slide, will auto infer from the first header if not specified
+title: 'React - Andrea Tosatto'
+# titleTemplate for the webpage, `%s` will be replaced by the page's title
+titleTemplate: 'React - Andrea Tosatto'
+# favicon, can be a local file path or URL
+favicon: ./assets/react-icon.svg
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
 background: ./assets/react-icon.svg
@@ -259,6 +265,7 @@ root.render(React.createElement(LikeButton));
 
 <div grid="~ cols-2 gap-4">
 <div>
+
 ```js {all|2,6,11,18-19}
 // like-button.js
 function LikeButton({ title }) {
@@ -629,6 +636,20 @@ function LikeProvider({ children }) {
   </div>
 </div>
 
+---
+
+# Librerie di state management
+
+- React API (Context, State, Reducer)
+- Flux (Redux, Zustand)
+- Proxy (Mobx, Valtio)
+- Atomic (Recoil, Jotai)
+- Data Fetching (React query, SWR)
+
+Alcune risorse: 
+
+- [Jotai vs Recoil - LogRocket Blog](https://blog.logrocket.com/jotai-vs-recoil-what-are-the-differences/)
+- [Choosing the right React state management - LogRocket Blog](https://blog.logrocket.com/guide-choosing-right-react-state-management-solution/)
 ---
 
 # Navigation
