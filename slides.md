@@ -28,8 +28,8 @@ css: unocss
 ---
 
 
-<div class="absolute left-385px bottom-435px">
-  <center><img src="assets/speaker.jpeg" id="speaker"></center>
+<div class="absolute left-385px bottom-435px flex flex-col items-center">
+  <img src="/assets/speaker.jpeg" id="speaker"/>
   <h2>Andrea Tosatto</h2>
 </div>
 
