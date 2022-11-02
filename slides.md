@@ -29,8 +29,11 @@ css: unocss
 
 
 <div class="absolute left-385px bottom-435px">
+  <center><img src="assets/speaker.jpeg" id="speaker"></center>
   <h2>Andrea Tosatto</h2>
 </div>
+
+
 
 <div class="absolute left-420px bottom-220px">
   <h1> React </h1>
@@ -39,6 +42,13 @@ css: unocss
 <div class="absolute left-340px bottom-90px">
   <a href="https://react-basic-thecmmbay.tosat.to">https://react-basic-thecmmbay.tosat.to</a>
 </div>
+
+<style>
+img#speaker {
+  width: 80px;
+  border-radius: 50%;
+}
+</style>
 
 ---
 layout: center
