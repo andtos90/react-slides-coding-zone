@@ -117,18 +117,16 @@ class: text-center
 <!-- index.html -->
 <body>
   <h2>React in un minuto</h2>
-  <!-- We will put our React component inside this div. -->
   <div id="like-button-root"></div>
 
-  <!-- Load React. -->
-  <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-  <script
-  src="https://unpkg.com/react@18/umd/react.development.js">
-  </script>
+<script src=
+"http://unpkg.com/react@18/umd/react.development.js">
+</script>
 
-  <script 
-  src="https://unpkg.com/react-dom@18/umd/react-dom.development.js">
-  </script>
+<script src="
+http://unpkg.com/react-dom@18/umd/react-dom.development.js
+">
+</script>
 
   <!-- Load your React component. -->
   <script src="like-button.js"></script>
@@ -155,7 +153,7 @@ function LikeButton() {
   );
 }
 
-const rootNode=document.getElementById('like-button-root');
+const rootNode=document.getElementById('like-button-root')
 const root=ReactDOM.createRoot(rootNode);
 root.render(React.createElement(LikeButton));
 ```
@@ -284,8 +282,8 @@ function LikeButton({ title }) {
 const rootNode=document.getElementById('like-button-root');
 const root=ReactDOM.createRoot(rootNode);
 root.render(<>
-    <LikeButton title={"Cuccioli"} />
-    <LikeButton title={"Bambini"} />
+    <LikeButton title={"React"} />
+    <LikeButton title={"Angular"} />
   </>);
 ```
 </div>
@@ -310,13 +308,10 @@ root.render(<>
 ```js {all|1|3-6|10-16}
 import LikeButton from "./like-button.js"
 
-const thingsToLike = [
-  "Cuccioli", "Bambini", "Ragni", "Musica Indie Italiana",
-  "React", "Angular"
-];
+const thingsToLike = ["React", "Angular", "Vue", "Solid"];
 
-const rootNode = document.getElementById("like-button-root");
-const root = ReactDOM.createRoot(rootNode);
+const rootNode=document.getElementById("like-button-root")
+const root=ReactDOM.createRoot(rootNode);
 root.render(
   <>
     {thingsToLike.map((title) => (
@@ -358,8 +353,8 @@ function LikeButton({ title }) {
 const rootNode=document.getElementById('like-button-root');
 const root=ReactDOM.createRoot(rootNode);
 root.render(<>
-    <LikeButton title={"Cuccioli"} />
-    <LikeButton title={"Bambini"} />
+    <LikeButton title={"React"} />
+    <LikeButton title={"Angular"} />
   </>);
 ```
 
@@ -403,65 +398,7 @@ root.render(<>
   </div>
   <div>
 
-```js {all|1|1-8|11-24|12,16-20|12-21|}
-function LikeButton({ title, isLiked, onLike }) {
-  if (isLiked) { return 'You liked ' + title; }
-  return (
-    <button onClick={() => onLike()}>
-      Like {title}
-    </button>
-  );
-}
-
-const thingsToLike = ["React", "Angular", "Vue", "Solid"];
-function LikeList() {
-  const [liked, setLiked] = React.useState([]);
-  return <>
-    Number of likes: {liked.length}
-    {thingsToLike.map((title) => (
-      <LikeButton 
-        title={title} 
-        isLiked={liked.includes(title)} 
-        onLike={() => setLiked([...liked, title])}
-      />
-    ))}
-  </>
-}
-root.render(<LikeList />;
-```
-  </div>
-</div>
-
----
-
-# Condividere lo stato
-
-<div grid="~ cols-2 gap-4">
-<div>
-
-```js {all}
-function LikeButton({ title }) {
-  const [liked, setLiked] = React.useState(false);
-
-  if (liked) { return 'You liked ' + title; }
-  return (
-    <button onClick={() => setLiked(true)}>
-      Like {title}
-    </button>
-  );
-}
-
-root.render(<>
-    <LikeButton title={"React"} />
-    <LikeButton title={"Angular"} />
-    <LikeButton title={"Vue"} />
-    <LikeButton title={"Solid"} />
-  </>);
-```
-  </div>
-  <div>
-
-```js {all|1|1-8|11-24|12,16-20|12-21|}
+```js {all|1|1-8|11-24|12,16-20|12-21|all}
 function LikeButton({ title, isLiked, onLike }) {
   if (isLiked) { return 'You liked ' + title; }
   return (
@@ -538,7 +475,7 @@ root.render(<LikeDashboard />);
 
 ---
 
-# Context - Esempio
+# Context - Confronto prima e dopo
 
 <div grid="~ cols-2 gap-4">
 <div>
@@ -627,14 +564,63 @@ function LikeProvider({ children }) {
 ```
   </div>
   <div>
-  <br>
-  <iframe height="250" width="420" scrolling="no" title="Context" src="https://codepen.io/andtos90/embed/Vwdezrd?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+
+```js {all}
+function LikeButton({ title }) {
+  const { getIsLiked, setLiked } 
+        = React.useContext(LikeContext);
+  if (getIsLiked(title)) { return 'You liked ' + title; }
+  return (<button onClick={() => setLiked(title)}>
+            Like {title}
+          </button>);
+}
+function LikeList() {
+  return thingsToLike.map((title) => (<LikeButton/>));
+}
+
+function LikeHeader() {
+  const { liked } = React.useContext(LikeContext);
+  return (<div>Number of likes: {liked.length}</div>);
+}
+function LikeDashboard() {
+  return (<LikeProvider>
+            <LikeHeader/>
+            <LikeList/>
+          </LikeProvider>);
+}
+root.render(<LikeDashboard />);
+```
+  </div>
+</div>
+
+
+---
+
+# Context - Esempio
+
+<br>
+<iframe height="400" width="900" scrolling="no" title="Context" src="https://codepen.io/andtos90/embed/Vwdezrd?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href="https://codepen.io/andtos90/pen/Vwdezrd">
   Context</a> by Andrea Tosatto (<a href="https://codepen.io/andtos90">@andtos90</a>)
   on <a href="https://codepen.io">CodePen</a>.
 </iframe>
-  </div>
-</div>
+
+---
+
+# Context - Pro e Contro
+
+<br>
+<br>
+
+## PRO
+
+- Facile da utilizzare
+- Integrato in React
+
+## Contro
+
+- Non adatto ad applicazioni con frequenti aggiornamenti
+- Le logiche complesse vanno gestite con molta attenzione per evitare esplosione di useState
 
 ---
 
@@ -645,310 +631,24 @@ function LikeProvider({ children }) {
 - Proxy (Mobx, Valtio)
 - Atomic (Recoil, Jotai)
 - Data Fetching (React query, SWR)
+- ...
+- Combinazione di una o più librerie
 
-Alcune risorse: 
+<br>
+<br>
+<br>
 
-- [Jotai vs Recoil - LogRocket Blog](https://blog.logrocket.com/jotai-vs-recoil-what-are-the-differences/)
+<hr/>
+
 - [Choosing the right React state management - LogRocket Blog](https://blog.logrocket.com/guide-choosing-right-react-state-management-solution/)
----
-
-# Navigation
-
-https://codepen.io/andtos90/full/LYrVKOy
-
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
-
-### Keyboard Shortcuts
-
-|     |     |
-| --- | --- |
-| <kbd>right</kbd> / <kbd>space</kbd>| next animation or slide |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd> | previous slide |
-| <kbd>down</kbd> | next slide |
-
-<!-- https://sli.dev/guide/animations.html#click-animations -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
-
----
-layout: image-right
-image: https://source.unsplash.com/collection/94734566/1920x1080
----
-
-# Code
-
-Use code snippets and get the highlighting directly![^1]
-
-```ts {all|2|1-6|9|all}
-interface User {
-  id: number
-  firstName: string
-  lastName: string
-  role: string
-}
-
-function updateUser(id: number, update: User) {
-  const user = getUser(id)
-  const newUser = { ...user, ...update }
-  saveUser(id, newUser)
-}
-```
-
-<arrow v-click="3" x1="400" y1="420" x2="230" y2="330" color="#564" width="3" arrowSize="1" />
-
-[^1]: [Learn More](https://sli.dev/guide/syntax.html#line-highlighting)
-
-<style>
-.footnotes-sep {
-  @apply mt-20 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
-
----
-
-# Components
-
-<div grid="~ cols-2 gap-4">
-<div>
-
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-
----
-class: px-20
----
-
-# Themes
-
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="-t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/themes/use.html) and
-check out the [Awesome Themes Gallery](https://sli.dev/themes/gallery.html).
-
----
-preload: false
----
-
-# Animations
-
-Animations are powered by [@vueuse/motion](https://motion.vueuse.org/).
-
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }">
-  Slidev
-</div>
-```
-
-<div class="w-60 relative mt-6">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-square.png"
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-circle.png"
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-triangle.png"
-    />
-  </div>
-
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 40, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn More](https://sli.dev/guide/animations.html#motion)
-
-</div>
-
----
-
-# LaTeX
-
-LaTeX is supported out-of-box powered by [KaTeX](https://katex.org/).
-
-<br>
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$
-\begin{array}{c}
-
-\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &
-= \frac{4\pi}{c}\vec{\mathbf{j}}    \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
-
-\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
-
-\nabla \cdot \vec{\mathbf{B}} & = 0
-
-\end{array}
-$$
-
-<br>
-
-[Learn more](https://sli.dev/guide/syntax#latex)
-
----
-
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-3 gap-10 pt-4 -mb-6">
-
-```mermaid {scale: 0.5}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
-
-</div>
-
-[Learn More](https://sli.dev/guide/syntax.html#diagrams)
-
+- [Top 6 React State Management - OpenReplay Blog](https://blog.openreplay.com/top-6-react-state-management-libraries-for-2022/)
+- [Jotai vs Recoil - LogRocket Blog](https://blog.logrocket.com/jotai-vs-recoil-what-are-the-differences/)
 
 ---
 layout: center
 class: text-center
 ---
 
-# Learn More
+# Grazie!
 
-[Documentations](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/showcases.html)
+[React Beta Docs](https://beta.reactjs.org/)
