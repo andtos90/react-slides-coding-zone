@@ -29,7 +29,6 @@ css: unocss
 
 
 <div class="absolute left-385px bottom-435px flex flex-col items-center">
-  <img src="/assets/speaker.jpeg" id="speaker"/>
   <h2>Andrea Tosatto</h2>
 </div>
 
@@ -662,3 +661,21 @@ class: text-center
 # Grazie!
 
 [React Beta Docs](https://beta.reactjs.org/)
+
+<br/>
+
+[Minicorso How to React: gestire lo stato nativamente](https://thecmmbay.com/eventi/minicorso-how-to-react-gestire-lo-stato-nativamente-9l0756qjqn2) - **Aldo Noschese e Riccardo Tartaglia**
+
+<br/>
+
+[React JS Masterclass](https://mktg.aulab.it/react-js-masterclass/) - **Andrea Tosatto**
+
+Javascript moderno<br/>
+Typescript<br/>
+Framework<br/>
+Librerie più utilizzate<br/>
+
+
+
+
+
