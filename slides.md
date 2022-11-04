@@ -122,7 +122,7 @@ class: text-center
 
 <div grid="~ cols-2 gap-4">
 <div>
-```html {all|4-5|8-15|17-18|all|none}
+```html {all|3-4|6-13|15-16|all|none}
 <!-- index.html -->
 <body>
   <h2>React in un minuto</h2>
@@ -314,7 +314,7 @@ root.render(<>
 <div grid="~ cols-2 gap-4">
 <div>
 
-```js {all|1|3-6|10-16}
+```js {all|1|3-6|8-12}
 import LikeButton from "./like-button.js"
 
 const thingsToLike = ["React", "Angular", "Vue", "Solid"];
@@ -554,7 +554,7 @@ root.render(<LikeDashboard />);
 <div>
 
 ```js {all|1,3|3-16|4,7-11|all}
-const LikeContext = React.createContext([]);
+const LikeContext = React.createContext({});
 
 function LikeProvider({ children }) {
   const [liked, setLiked] = React.useState([]);
